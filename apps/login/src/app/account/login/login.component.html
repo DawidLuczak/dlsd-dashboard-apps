@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <dlsd-input formControlName="email" size="s" placeholder="Email"></dlsd-input>
+
+  <dlsd-input
+    formControlName="password"
+    size="s"
+    placeholder="Password"
+    (valueChange)="updatePasswordConfirmControlValidity()"
+  ></dlsd-input>
+
+  @if (formMode() === AccountFormMode.SIGN_UP) {
+  <dlsd-input
+    formControlName="passwordConfirm"
+    size="s"
+    placeholder="Confirm password"
+  ></dlsd-input>
+  }
+
+  <dlsd-button (click)="submitForm()">{{
+    formMode() === AccountFormMode.SIGN_IN ? 'Sign In' : 'Create new account'
+  }}</dlsd-button>
+
+  @if (formMode() === AccountFormMode.SIGN_IN) {
+  <a (click)="formMode.set(AccountFormMode.SIGN_UP)">Załóź konto</a>
+  } @else {
+  <a (click)="formMode.set(AccountFormMode.SIGN_IN)">Zaloguj się</a>
+  }
+</form>

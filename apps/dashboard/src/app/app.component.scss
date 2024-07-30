@@ -1,0 +1,26 @@
+:host {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-areas: 'hr hr' 'nav main';
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+header {
+  width: 100%;
+  height: 40px;
+  grid-area: hr;
+  border-bottom: 1px solid black;
+}
+
+nav {
+  width: 60px;
+  grid-area: nav;
+  border-right: 1px solid black;
+}
+
+main {
+  grid-area: main;
+  padding: 8px;
+}

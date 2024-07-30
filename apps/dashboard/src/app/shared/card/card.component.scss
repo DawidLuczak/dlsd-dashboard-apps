@@ -1,0 +1,25 @@
+:host {
+  width: 180px;
+  height: 240px;
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr;
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 1px gray;
+  transition: box-shadow 300ms ease;
+
+  &:hover {
+    box-shadow: 0 5px 10px gray;
+  }
+}
+
+p,
+h3 {
+  width: fit-content;
+  align-self: flex-end;
+  justify-self: center;
+  text-overflow: ellipsis;
+  text-align: center;
+}
