@@ -1,0 +1,11 @@
+<nav>
+  <ul>
+    @for (route of routes(); track route) {
+    <dlsd-nav-item
+      [route]="route"
+      [activeRoutesTree]="activeRouteTree()"
+      (activate)="activeRouteTree.set($event)"
+    ></dlsd-nav-item>
+    }
+  </ul>
+</nav>
