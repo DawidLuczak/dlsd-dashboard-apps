@@ -1,3 +1,9 @@
+export interface AuthenticationResponse {
+  token: string;
+  expiresIn: string;
+  username: string;
+}
+
 export interface Account {
   email: string;
 }

@@ -1,0 +1,6 @@
+<h6
+  [dlsdDropdownOptions]="[{ options: accountOptions() }]"
+  (dropdownValueChange)="$event.value.value()"
+>
+  {{ account().email }}
+</h6>

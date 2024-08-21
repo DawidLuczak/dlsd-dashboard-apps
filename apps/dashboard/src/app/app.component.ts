@@ -5,27 +5,50 @@ import {
   effect,
   signal,
 } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
-import { NavComponent } from '@dlsd/shared-layout';
-import { DLSDActiveRoutesTree } from 'dlsd-angular-ui';
-import { appRoutes } from './app.routes';
+import { Router, RouterModule } from '@angular/router';
+import { AuthenticationService } from '@dlsd/data-access-user';
+import { HeaderComponent, NavComponent } from '@dlsd/shared-layout';
+import {
+  DLSDActiveRoutesTree,
+  DLSDButtonComponent,
+  DLSDCallbackOption,
+} from 'dlsd-angular-ui';
+import { loginRoute, remoteRoutes } from './app.routes';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, DashboardComponent, NavComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    DashboardComponent,
+    NavComponent,
+    HeaderComponent,
+    DLSDButtonComponent,
+  ],
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrl: 'app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  protected routes = signal<Routes>(appRoutes);
+  protected readonly loginRoute = loginRoute;
+  protected readonly remoteRoutes = remoteRoutes;
+  protected readonly accountOptions: DLSDCallbackOption[] = [
+    {
+      name: 'Logout',
+      value: () => this.authenticationService.logout(),
+    },
+  ];
+
   protected activeRouteTree = signal<DLSDActiveRoutesTree>({
-    route: this.routes()[0],
+    route: { path: '' },
   });
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    protected authenticationService: AuthenticationService
+  ) {
     effect(() => this.navigateTo(this.activeRouteTree()));
   }
 

@@ -1,11 +1,11 @@
 nav {
   height: 100%;
-  padding: 8px 0;
   border-right: 1px solid black;
 
   ul {
     display: flex;
     flex-direction: column;
+    list-style: none;
 
     dlsd-nav-item {
       border-bottom: 1px solid gray;

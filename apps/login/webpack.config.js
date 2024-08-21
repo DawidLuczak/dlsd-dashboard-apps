@@ -4,9 +4,7 @@ const path = require('path');
 const share = mf.share;
 
 const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(path.join(__dirname, '../../tsconfig.base.json'), [
-  /* mapped paths to share */
-]);
+sharedMappings.register(path.join(__dirname, '../../tsconfig.base.json'), []);
 
 module.exports = {
   output: {
@@ -27,18 +25,11 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       library: { type: 'module' },
-
       name: 'login',
       filename: 'remoteEntry.mjs',
       exposes: {
         './Routes': './apps/login/src/app/remote-entry/entry.routes.ts',
       },
-
-      // For hosts (please adjust)
-      // remotes: {
-      //     "dashboard": "http://localhost:4200/remoteEntry.js",
-
-      // },
 
       shared: share({
         '@angular/core': {

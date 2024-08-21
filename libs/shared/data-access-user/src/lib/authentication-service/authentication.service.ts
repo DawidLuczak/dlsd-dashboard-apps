@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, InjectionToken, signal } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Injectable, InjectionToken } from '@angular/core';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../environment';
-import { Account, Credentials } from '../account';
+import { Account, AuthenticationResponse, Credentials } from '../account';
+import { AccountDataService } from '../account-data-service/account-data.service';
 
 export const AUTHENTICATION_SERVICE_API_URL = new InjectionToken<string>(
   'Authentication service api url'
@@ -10,22 +11,24 @@ export const AUTHENTICATION_SERVICE_API_URL = new InjectionToken<string>(
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private _account = signal<Account | null>(null);
-  public get account() {
-    return this._account.asReadonly();
-  }
-
   private apiUrl = `${environment.gatewayServiceUrl}${environment.authenticationServiceEndpoint}`;
 
-  constructor(private httpClient: HttpClient) {}
+  public get account() {
+    return this.accountDataService.account;
+  }
+
+  constructor(
+    private httpClient: HttpClient,
+    private accountDataService: AccountDataService
+  ) {}
 
   // constructor(
   //   @Inject(AUTHENTICATION_SERVICE_API_URL) private apiUrl: string,
   //   private httpClient: HttpClient
   // ) {}
 
-  logout() {
-    this._account.set(null);
+  public logout() {
+    this.accountDataService.clearAuthenticationData();
   }
 
   public getAccounts(): Observable<Account[]> {
@@ -42,15 +45,16 @@ export class AuthenticationService {
     return this.httpClient.post<boolean>(`${this.apiUrl}/exists`, email);
   }
 
-  public signIn(form: Credentials): Observable<Account> {
+  public signIn(form: Credentials): Observable<undefined> {
     return this.httpClient
-      .post<Account>(`${this.apiUrl}/authenticate`, {
+      .post<AuthenticationResponse>(`${this.apiUrl}/authenticate`, {
         ...form,
       })
       .pipe(
-        tap((result) => {
-          this._account.set(form);
-        })
+        tap((response) => {
+          this.accountDataService.saveAuthenticationData(response);
+        }),
+        map(() => undefined)
       );
   }
 }

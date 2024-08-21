@@ -13,6 +13,13 @@ export const remoteRoutes: RouteCard[] = [
   },
 ];
 
+export const loginRoute: Route = {
+  title: 'Login',
+  path: 'login',
+  loadChildren: () =>
+    loadRemoteModule('login', './Routes').then((m) => m.remoteRoutes),
+};
+
 export const appRoutes: Route[] = [
   {
     title: 'Dashboard',
@@ -22,11 +29,6 @@ export const appRoutes: Route[] = [
       cards: remoteRoutes,
     },
   },
-  {
-    title: 'Login',
-    path: 'login',
-    loadChildren: () =>
-      loadRemoteModule('login', './Routes').then((m) => m.remoteRoutes),
-  },
+  loginRoute,
   ...remoteRoutes,
 ];

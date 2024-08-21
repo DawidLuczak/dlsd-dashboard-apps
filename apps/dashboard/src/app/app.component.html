@@ -1,9 +1,14 @@
-<header></header>
+<dlsd-layout-header
+  [account]="authenticationService.account()"
+  [loginRoute]="loginRoute"
+  [accountOptions]="accountOptions"
+></dlsd-layout-header>
 
 <dlsd-layout-nav
-  [routes]="routes()"
+  [routes]="remoteRoutes"
   [(activeRouteTree)]="activeRouteTree"
 ></dlsd-layout-nav>
+
 <main>
   <router-outlet></router-outlet>
 </main>

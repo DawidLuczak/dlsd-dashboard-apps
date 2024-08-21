@@ -10,27 +10,16 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "es2022",
-    "lib": [
-      "es2022",
-      "dom"
-    ],
+    "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "useDefineForClassFields": false,
     "baseUrl": ".",
     "paths": {
-      "@dlsd/data-access-user": [
-        "libs/shared/data-access-user/src/index.ts"
-      ],
-      "@dlsd/shared-layout": [
-        "libs/shared-layout/src/index.ts"
-      ],
-      "login/Routes": [
-        "apps/login/src/app/remote-entry/entry.routes.ts"
-      ],
-      "@dlsd/ui": [
-        "node_modules/dlsd-angular-ui/public-api.d.ts"
-      ]
+      "@dlsd/data-access-user": ["libs/shared/data-access-user/src/index.ts"],
+      "@dlsd/shared-layout": ["libs/shared-layout/src/index.ts"],
+      "@dlsd/ui": ["node_modules/dlsd-angular-ui/public-api.d.ts"],
+      "login/Routes": ["apps/login/src/app/remote-entry/entry.routes.ts"]
     }
   },
   "angularCompilerOptions": {
@@ -39,7 +28,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "exclude": [
-    "tmp"
-  ]
+  "exclude": ["tmp"]
 }

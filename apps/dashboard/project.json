@@ -5,7 +5,6 @@
   "prefix": "app",
   "sourceRoot": "apps/dashboard/src",
   "tags": [],
-  
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
@@ -80,7 +79,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/**/*.ts",
+          "./functions/**/*.ts",
+          "./functions/**/*.ts"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -95,6 +101,21 @@
         "buildTarget": "dashboard:build",
         "port": 4200,
         "spa": true
+      }
+    },
+    "serve-functions": {
+      "command": "npx netlify dev"
+    },
+    "deploy-functions": {
+      "command": "npx netlify deploy --site=909af2bc-cd13-4aa8-9fd4-728a162afac6",
+      "options": {
+        "cwd": "apps/dashboard"
+      },
+      "configurations": {
+        "production": {
+          "command": "npx netlify deploy --site=909af2bc-cd13-4aa8-9fd4-728a162afac6 --prod",
+          "cwd": "apps/dashboard"
+        }
       }
     }
   }

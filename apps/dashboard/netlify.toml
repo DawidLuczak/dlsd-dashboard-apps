@@ -1,0 +1,16 @@
+[build]
+publish = "/dist/apps/dashboard"
+[functions]
+directory = "functions/"
+node_bundler = "esbuild"
+
+[[redirects]]
+  from = "*"
+  to = "http://localhost:4200"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

@@ -1,4 +1,4 @@
 {
-  "design-system": "http://localhost:4222",
+  "design-system": "https://dlsd-design-system.netlify.app/",
   "login": "http://localhost:4201"
 }

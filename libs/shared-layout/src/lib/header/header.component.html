@@ -1,1 +1,14 @@
-<header></header>
+<header>
+  <h3 class="home" routerLink="/">Dashboard</h3>
+
+  @if (account(); as account) {
+  <dlsd-layout-account-item
+    [account]="account"
+    [accountOptions]="accountOptions()"
+  ></dlsd-layout-account-item>
+  } @else {
+  <dlsd-button size="s" [routerLink]="loginRoute().path">{{
+    loginRoute().title
+  }}</dlsd-button>
+  }
+</header>

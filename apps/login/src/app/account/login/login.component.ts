@@ -62,6 +62,7 @@ export class LoginComponent {
       if (formMode === AccountFormMode.SIGN_IN) {
         this.form.removeControl('passwordConfirm');
         this.emailControl.clearAsyncValidators();
+        this.emailControl.updateValueAndValidity();
       } else {
         this.form.setControl(
           'passwordConfirm',
@@ -97,7 +98,7 @@ export class LoginComponent {
 
   private signIn(accountForm: CreateAccountForm): void {
     this.authenticationService.signIn(accountForm).subscribe({
-      next: () => this.router.navigate(['']),
+      next: () => this.router.navigate(['/']),
       error: (error) => console.log(error),
     });
   }
